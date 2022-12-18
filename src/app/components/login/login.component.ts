@@ -7,8 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
   loginForm = {
-    email: '',
-    password: '',
+    email: { value: '', error: '' },
+    password: { value: '', error: '' },
   };
 
   constructor() {}
@@ -16,6 +16,16 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {}
 
   emailLogin() {
-    alert('Login for Email' + this.loginForm.email);
+    // todo: validate Email
+    this.loginForm.email.error = '';
+    this.loginForm.password.error = '';
+
+    if (this.loginForm.email.value === '') {
+      this.loginForm.email.error = 'Plz enter email.';
+    } else if (this.loginForm.password.value === '') {
+      this.loginForm.password.error = 'Plz enter password.';
+    } else {
+      alert('Login for Email' + this.loginForm.email.value);
+    }
   }
 }

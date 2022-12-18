@@ -1,4 +1,4 @@
-<form>
+<form class="needs-validation">
   <div class="mb-3">
     <label for="loginEmail" class="form-label">Email</label>
     <input
@@ -8,8 +8,15 @@
       name="loginEmail"
       placeholder="Email"
       email="true"
-      [(ngModel)]="loginForm.email"
+      [(ngModel)]="loginForm.email.value"
+      (input) = "loginForm.email.error=''"
     />
+    <div
+      *ngIf="loginForm.email.error"
+      ngClass="invalid-feedback {{ loginForm.email.error ? 'd-block' : '' }}"
+    >
+      {{ loginForm.email.error }}
+    </div>
   </div>
   <div class="mb-3">
     <label for="loginPassword" class="form-label">Password</label>
@@ -19,8 +26,15 @@
       id="loginPassword"
       name="loginPassword"
       placeholder="Password"
-      [(ngModel)]="loginForm.password"
+      [(ngModel)]="loginForm.password.value"
+      (input) = "loginForm.password.error=''"
     />
+  </div>
+  <div
+    *ngIf="loginForm.password.error"
+    ngClass="invalid-feedback {{ loginForm.password.error ? 'd-block' : '' }}"
+  >
+    {{ loginForm.password.error }}
   </div>
   <button type="submit" class="btn btn-primary" (click)="emailLogin()">
     Submit
