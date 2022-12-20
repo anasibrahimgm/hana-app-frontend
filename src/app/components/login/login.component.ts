@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { emailLoginUserDto, UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -11,9 +12,17 @@ export class LoginComponent implements OnInit {
     password: { value: '', error: '' },
   };
 
-  constructor() {}
+  constructor(private userService: UserService) {}
 
   ngOnInit(): void {}
+
+  loginEmailChange() {
+    this.loginForm.email.error = '';
+  }
+
+  loginPasswordChange() {
+    this.loginForm.password.error = '';
+  }
 
   emailLogin() {
     // todo: validate Email
@@ -25,7 +34,23 @@ export class LoginComponent implements OnInit {
     } else if (this.loginForm.password.value === '') {
       this.loginForm.password.error = 'Plz enter password.';
     } else {
-      alert('Login for Email' + this.loginForm.email.value);
+      let dto: emailLoginUserDto = {
+        email: this.loginForm.email.value,
+        password: this.loginForm.password.value,
+      };
+
+      this.userService.emailLogin(dto).subscribe((a) => {
+        console.log('a', a);
+        if (a.error === true) {
+          if (a.email) {
+            this.loginForm.email.error = a.email;
+          }
+
+          if (a.password) {
+            this.loginForm.password.error = a.password;
+          }
+        }
+      });
     }
   }
 }

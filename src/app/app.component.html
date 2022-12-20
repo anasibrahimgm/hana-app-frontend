@@ -3,7 +3,7 @@
     <h2 class="alert alert-success text-center mt-4 w-25">{{ title }}</h2>
   </div>
 
-  <div class="row">   
-    <app-login *ngIf="!loginData.loggedIn" class="offset-3 col-6"></app-login>
+  <div class="row" *ngIf="!loginData.loggedIn">
+    <app-login class="offset-2 col-8 card p-4"></app-login>
   </div>
 </div>

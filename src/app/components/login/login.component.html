@@ -9,12 +9,9 @@
       placeholder="Email"
       email="true"
       [(ngModel)]="loginForm.email.value"
-      (input) = "loginForm.email.error=''"
+      (input)="loginEmailChange()"
     />
-    <div
-      *ngIf="loginForm.email.error"
-      ngClass="invalid-feedback {{ loginForm.email.error ? 'd-block' : '' }}"
-    >
+    <div *ngIf="loginForm.email.error" class="invalid-feedback d-block">
       {{ loginForm.email.error }}
     </div>
   </div>
@@ -27,16 +24,28 @@
       name="loginPassword"
       placeholder="Password"
       [(ngModel)]="loginForm.password.value"
-      (input) = "loginForm.password.error=''"
+      (input)="loginPasswordChange()"
     />
+    <div *ngIf="loginForm.password.error" class="invalid-feedback d-block">
+      {{ loginForm.password.error }}
+    </div>
   </div>
-  <div
-    *ngIf="loginForm.password.error"
-    ngClass="invalid-feedback {{ loginForm.password.error ? 'd-block' : '' }}"
-  >
-    {{ loginForm.password.error }}
+
+  <div class="row mb-2">
+    <div class="col-6">
+      <a href="#" class="">Forgot Password</a>
+      <br class="" />
+      <a href="#" class="">Register</a>
+    </div>
+
+    <div class="offset-3 col-3 d-flex justify-content-end">
+      <button
+        type="submit"
+        class="btn btn-success float-right w-100"
+        (click)="emailLogin()"
+      >
+        Login
+      </button>
+    </div>
   </div>
-  <button type="submit" class="btn btn-primary" (click)="emailLogin()">
-    Submit
-  </button>
 </form>
