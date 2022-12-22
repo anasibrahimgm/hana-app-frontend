@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserLoginService } from 'src/app/services/user-login.service';
 import { emailLoginUserDto, UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -12,7 +13,10 @@ export class LoginComponent implements OnInit {
     password: { value: '', error: '' },
   };
 
-  constructor(private userService: UserService) {}
+  constructor(
+    private userService: UserService,
+    private userLoginService: UserLoginService
+  ) {}
 
   ngOnInit(): void {}
 
@@ -49,6 +53,8 @@ export class LoginComponent implements OnInit {
           if (a.password) {
             this.loginForm.password.error = a.password;
           }
+        } else {
+          this.userLoginService.setLoggedInUserData(a);
         }
       });
     }

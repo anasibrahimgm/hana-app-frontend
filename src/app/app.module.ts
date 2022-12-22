@@ -6,11 +6,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { LandingPageComponent } from './components/landing-page/landing-page.component';
+import { AlertComponent } from './components/alert/alert.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
+    LandingPageComponent,
+    AlertComponent,
   ],
   imports: [
     BrowserModule,
