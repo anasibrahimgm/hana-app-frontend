@@ -19,6 +19,14 @@ export class UserService {
   private apiUrl = 'http://localhost:3000/api/user/';
   constructor(private httpClient: HttpClient) {}
 
+  emailRegister(dto: emailRegisterUserDto): Observable<any> {
+    let url = this.apiUrl + 'register';
+    return this.httpClient
+      .post<LoggedInUserDto>(url, dto, httpOptions)
+      .pipe(catchError(this.handleEmailLoginError));
+    // when getting the confirmatio from backend, save it in app.component.ts so that u login the user
+  }
+
   emailLogin(dto: emailLoginUserDto): Observable<LoggedInUserDto> {
     let url = this.apiUrl + 'login';
     return this.httpClient
@@ -58,6 +66,12 @@ export class UserService {
 }
 
 export type emailLoginUserDto = {
+  readonly email: string;
+  readonly password: string;
+};
+
+export type emailRegisterUserDto = {
+  readonly name: string;
   readonly email: string;
   readonly password: string;
 };

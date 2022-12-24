@@ -31,14 +31,17 @@ export class UserLoginService {
 
       if (loginDataObj !== null) {
         this.userService.validateToken(loginDataObj).subscribe((res) => {
-          console.log('res', res);
           // token: 'valid' | 'invalid' | 'expired'
 
           if (res.error === true) {
           } else {
             if (res.token == 'valid') {
               this.setLoggedInUserData(loginDataObj);
-            } else if (res.token == 'invalid') {
+            } else {
+              localStorage.removeItem('loginData');
+            }
+
+            if (res.token == 'invalid') {
               this.alertService.addAlert({
                 status: 'danger',
                 message: 'Invalid Login!',

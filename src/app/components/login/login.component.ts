@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { UserLoginService } from 'src/app/services/user-login.service';
 import { emailLoginUserDto, UserService } from 'src/app/services/user.service';
 
@@ -8,6 +8,9 @@ import { emailLoginUserDto, UserService } from 'src/app/services/user.service';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
+  @Output() showRegister = new EventEmitter();
+  @Output() showForgotPassword = new EventEmitter();
+
   loginForm = {
     email: { value: '', error: '' },
     password: { value: '', error: '' },
@@ -58,5 +61,13 @@ export class LoginComponent implements OnInit {
         }
       });
     }
+  }
+
+  onShowRegister() {
+    this.showRegister.emit();
+  }
+
+  onShowForgotPassword() {
+    this.showForgotPassword.emit();
   }
 }

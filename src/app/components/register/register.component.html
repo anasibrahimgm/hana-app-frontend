@@ -1,0 +1,67 @@
+<form class="needs-validation">
+  <div class="mb-3">
+    <label for="registerName" class="form-label">Name</label>
+    <input
+      type="email"
+      class="form-control"
+      id="registerName"
+      name="registerName"
+      placeholder="Name"
+      email="true"
+      [(ngModel)]="registerForm.name.value"
+      (input)="registerNameChange()"
+    />
+    <div *ngIf="registerForm.name.error" class="invalid-feedback d-block">
+      {{ registerForm.name.error }}
+    </div>
+  </div>
+  <div class="mb-3">
+    <label for="registerEmail" class="form-label">Email</label>
+    <input
+      type="email"
+      class="form-control"
+      id="registerEmail"
+      name="registerEmail"
+      placeholder="Email"
+      email="true"
+      [(ngModel)]="registerForm.email.value"
+      (input)="registerEmailChange()"
+    />
+    <div *ngIf="registerForm.email.error" class="invalid-feedback d-block">
+      {{ registerForm.email.error }}
+    </div>
+  </div>
+  <div class="mb-3">
+    <label for="registerPassword" class="form-label">Password</label>
+    <input
+      type="password"
+      class="form-control"
+      id="registerPassword"
+      name="registerPassword"
+      placeholder="Password"
+      [(ngModel)]="registerForm.password.value"
+      (input)="registerPasswordChange()"
+    />
+    <div *ngIf="registerForm.password.error" class="invalid-feedback d-block">
+      {{ registerForm.password.error }}
+    </div>
+  </div>
+
+  <div class="row mb-2">
+    <div class="col-6">
+      Already registerd?
+      <br>
+      <a href="#" class="" (click)="onShowLogin()">Login</a>
+    </div>
+
+    <div class="offset-3 col-3 d-flex justify-content-end">
+      <button
+        type="submit"
+        class="btn btn-success float-right w-100"
+        (click)="emailRegister()"
+      >
+        Register
+      </button>
+    </div>
+  </div>
+</form>

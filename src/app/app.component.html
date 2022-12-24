@@ -1,6 +1,12 @@
 <div class="container">
-  <div class="d-flex justify-content-center">
-    <h2 class="alert alert-success text-center mt-4 w-25">{{ title }}</h2>
+  <div class="row">
+    <div class="offset-1 col-10 d-flex justify-content-center">
+      <h2 class="alert alert-success text-center mt-4 w-25">{{ title }}</h2>
+    </div>
+
+    <button class="btn col-1" *ngIf="getActiveModule() === 'landingPage'" (click)="logout()">
+      <fa-icon class="float-right" [icon]="faArrowCircleRight"></fa-icon>
+    </button>
   </div>
 
   <app-alert
@@ -9,9 +15,19 @@
     [message]="alert.message"
   ></app-alert>
 
-  <div *ngIf="!isLoggedIn(); then thenBlock; else elseBlock" class="row"></div>
-  <ng-template #thenBlock
-    ><app-login class="offset-2 col-8 card p-4"></app-login
-  ></ng-template>
-  <ng-template #elseBlock><app-landing-page></app-landing-page></ng-template>
+  <app-login
+    *ngIf="getActiveModule() === 'login'"
+    (showRegister)="setActiveModule('register')"
+    (showForgotPassword)="setActiveModule('forgotPassword')"
+    class="offset-2 col-8 card p-4"
+  ></app-login>
+
+  <app-register
+    *ngIf="getActiveModule() === 'register'"
+    (showLogin)="setActiveModule('login')"
+  ></app-register>
+
+  <app-landing-page
+    *ngIf="getActiveModule() === 'landingPage'"
+  ></app-landing-page>
 </div>

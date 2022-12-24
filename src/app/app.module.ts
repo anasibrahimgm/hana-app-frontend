@@ -8,6 +8,7 @@ import { LoginComponent } from './components/login/login.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
 import { AlertComponent } from './components/alert/alert.component';
+import { RegisterComponent } from './components/register/register.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { AlertComponent } from './components/alert/alert.component';
     LoginComponent,
     LandingPageComponent,
     AlertComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,

@@ -3,6 +3,7 @@ import { LoggedInUserDto } from './services/user.service';
 import { Subscription } from 'rxjs';
 import { UserLoginService } from './services/user-login.service';
 import { Alert, AlertService } from './services/alert.service';
+import { faArrowCircleRight } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-root',
@@ -11,8 +12,9 @@ import { Alert, AlertService } from './services/alert.service';
 })
 export class AppComponent {
   title = 'HanaApp';
+  faArrowCircleRight = faArrowCircleRight;
 
-  private loggedIn: boolean = false;
+  private activeModule: TypeActiveModule = 'login';
 
   loginData: LoggedInUserDto = {
     email: '',
@@ -31,7 +33,7 @@ export class AppComponent {
     this.loginSubscription = this.userLoginService
       .publishLoggedInUserData()
       .subscribe((dto) => {
-        this.loggedIn = true;
+        this.activeModule = 'landingPage';
         this.loginData = dto;
 
         localStorage.setItem('loginData', JSON.stringify(this.loginData));
@@ -46,7 +48,18 @@ export class AppComponent {
     this.userLoginService.validateLoginDataInLocalstorage();
   }
 
-  isLoggedIn() {
-    return this.loggedIn;
+  getActiveModule(): TypeActiveModule {
+    return this.activeModule;
+  }
+
+  setActiveModule(module: TypeActiveModule) {
+    this.activeModule = module;
+  }
+
+  logout() {
+    localStorage.removeItem('loginData');
+    this.setActiveModule('login');
   }
 }
+
+type TypeActiveModule = 'login' | 'register' | 'forgotPassword' | 'landingPage';
